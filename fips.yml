@@ -1,0 +1,11 @@
+#
+# fips-pcre
+#
+---
+exports:
+    header-dirs:
+        - .
+    modules:
+        pcre: .
+    defines:
+        PCRE_STATIC: 1
