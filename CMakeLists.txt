@@ -38,10 +38,15 @@ fips_begin_lib(pcre)
         pcre_version.c
         pcre_xclass.c
     )
-    if (FIPS_CLANG)
-        set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-self-assign -Wno-unused-const-variable")
-    endif()
 fips_end_lib()
+
+if (FIPS_CLANG)
+    set_target_properties(pcre PROPERTIES COMPILE_FLAGS "-Wno-self-assign -Wno-unused-const-variable -Wno-implicit-fallthrough")
+endif()
+
+if (FIPS_GCC)
+    set_target_properties(pcre PROPERTIES COMPILE_FLAGS "-Wno-unused-const-variable -Wno-implicit-fallthrough")
+endif()
 
 if (NOT FIPS_IMPORT)
     fips_finish()
